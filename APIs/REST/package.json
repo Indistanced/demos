@@ -4,7 +4,9 @@
   "description": "CREATE -> POST\\\r READ -> GET\\\r UPDATE -> PUT/PATCH\\\r DELETE -> DELETE",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon dist/server.js"
+    "build": "tsc",
+    "devStart": "tsc && nodemon dist/server.js",
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
