@@ -26,8 +26,8 @@ router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Send found documents
         res.json(subscribers);
     }
-    catch (err) {
-        res.status(500).json({ message: err.message });
+    catch (e) {
+        res.status(500).json({ message: e.message });
     }
 }));
 // Get one
@@ -44,8 +44,8 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const newSubscriber = yield subscriber.save();
         res.status(201).json(newSubscriber);
     }
-    catch (err) {
-        res.status(400).json({ message: err.message });
+    catch (e) {
+        res.status(400).json({ message: e.message });
     }
 }));
 // Update all
@@ -58,8 +58,8 @@ router.patch('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
         res.json(updatedSubscribers);
     }
-    catch (err) {
-        res.status(400).json({ message: err.message });
+    catch (e) {
+        res.status(400).json({ message: e.message });
     }
 }));
 // Update one
@@ -74,8 +74,8 @@ router.patch('/:id', getSubscriber, (req, res) => __awaiter(void 0, void 0, void
         const updatedSubscriber = yield res.locals.subscriber.save();
         res.json(updatedSubscriber);
     }
-    catch (err) {
-        res.status(400).json({ message: err.message });
+    catch (e) {
+        res.status(400).json({ message: e.message });
     }
 }));
 // Delete all
@@ -85,8 +85,8 @@ router.delete('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const result = yield subscriber_1.default.deleteMany({});
         res.json({ message: "Deleted subscribers", result });
     }
-    catch (err) {
-        res.status(500).json({ message: err.message });
+    catch (e) {
+        res.status(500).json({ message: e.message });
     }
 }));
 // Delete one
@@ -95,8 +95,8 @@ router.delete('/:id', getSubscriber, (_req, res) => __awaiter(void 0, void 0, vo
         yield res.locals.subscriber.deleteOne();
         res.json({ message: "Deleted subscriber" });
     }
-    catch (err) {
-        res.status(500).json({ message: err.message });
+    catch (e) {
+        res.status(500).json({ message: e.message });
     }
 }));
 // Middleware to fetch subscriber document from database by ID
@@ -109,8 +109,8 @@ function getSubscriber(req, res, next) {
                 return res.status(404).json({ message: "Cannot find subscriber" });
             }
         }
-        catch (err) {
-            return res.status(500).json({ message: err.message });
+        catch (e) {
+            return res.status(500).json({ message: e.message });
         }
         res.locals.subscriber = subscriber;
         next();

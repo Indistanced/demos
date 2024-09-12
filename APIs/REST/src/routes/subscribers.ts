@@ -12,8 +12,8 @@ router.get('/', async (_req: Request, res: Response) => {
         const subscribers = await Subscriber.find()
         // Send found documents
         res.json(subscribers)
-    } catch (err: any) {
-        res.status(500).json({ message: err.message })
+    } catch (e: any) {
+        res.status(500).json({ message: e.message })
     }
 })
 
@@ -31,8 +31,8 @@ router.post('/', async (req: Request, res: Response) => {
     try {
         const newSubscriber = await subscriber.save()
         res.status(201).json(newSubscriber)
-    } catch (err: any) {
-        res.status(400).json({ message: err.message })
+    } catch (e: any) {
+        res.status(400).json({ message: e.message })
     }
 })
 
@@ -45,8 +45,8 @@ router.patch('/', async (req: Request, res: Response) => {
             subscribedToChannel: req.body.subscribedToChannel
         })
         res.json(updatedSubscribers)
-    } catch (err: any) {
-        res.status(400).json({ message: err.message })
+    } catch (e: any) {
+        res.status(400).json({ message: e.message })
     }
 })
 
@@ -61,8 +61,8 @@ router.patch('/:id', getSubscriber, async (req, res) => {
     try {
         const updatedSubscriber = await res.locals.subscriber.save()
         res.json(updatedSubscriber)
-    } catch (err: any) {
-        res.status(400).json({ message: err.message })
+    } catch (e: any) {
+        res.status(400).json({ message: e.message })
     }
 })
 
@@ -72,8 +72,8 @@ router.delete('/', async (_req: Request, res: Response) => {
     try {
         const result = await Subscriber.deleteMany({})
         res.json({ message: "Deleted subscribers", result} )
-    } catch (err: any) {
-        res.status(500).json({ message: err.message })
+    } catch (e: any) {
+        res.status(500).json({ message: e.message })
     }
 })
 
@@ -82,8 +82,8 @@ router.delete('/:id', getSubscriber, async (_req: Request, res: Response) => {
     try {
         await res.locals.subscriber.deleteOne()
         res.json({ message: "Deleted subscriber"})
-    } catch (err: any) {
-        res.status(500).json({ message: err.message })
+    } catch (e: any) {
+        res.status(500).json({ message: e.message })
     }
 })
 
@@ -95,8 +95,8 @@ async function getSubscriber(req: Request, res: Response, next: NextFunction) {
         if (subscriber == null){
             return res.status(404).json({ message: "Cannot find subscriber"})
         }
-    } catch (err: any) {
-        return res.status(500).json({ message: err.message })
+    } catch (e: any) {
+        return res.status(500).json({ message: e.message })
     }
     res.locals.subscriber = subscriber
     next()
