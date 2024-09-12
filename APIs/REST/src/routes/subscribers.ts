@@ -36,6 +36,20 @@ router.post('/', async (req: Request, res: Response) => {
     }
 })
 
+// Update all
+router.patch('/', async (req: Request, res: Response) => {
+    console.log("PATCH /subscribers hit")
+    try {
+        const updatedSubscribers = await Subscriber.updateMany({}, {
+            name: req.body.name,
+            subscribedToChannel: req.body.subscribedToChannel
+        })
+        res.json(updatedSubscribers)
+    } catch (err: any) {
+        res.status(400).json({ message: err.message })
+    }
+})
+
 // Update one
 router.patch('/:id', getSubscriber, async (req, res) => {
     if (req.body.name != null){
@@ -52,8 +66,19 @@ router.patch('/:id', getSubscriber, async (req, res) => {
     }
 })
 
+// Delete all
+router.delete('/', async (_req: Request, res: Response) => {
+    console.log("PATCH /subscribers hit")
+    try {
+        const result = await Subscriber.deleteMany({})
+        res.json({ message: "Deleted subscribers", result} )
+    } catch (err: any) {
+        res.status(500).json({ message: err.message })
+    }
+})
+
 // Delete one
-router.delete('/:id', getSubscriber, async (_req, res) => {
+router.delete('/:id', getSubscriber, async (_req: Request, res: Response) => {
     try {
         await res.locals.subscriber.deleteOne()
         res.json({ message: "Deleted subscriber"})

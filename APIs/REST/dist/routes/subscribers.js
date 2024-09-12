@@ -48,6 +48,20 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(400).json({ message: err.message });
     }
 }));
+// Update all
+router.patch('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("PATCH /subscribers hit");
+    try {
+        const updatedSubscribers = yield subscriber_1.default.updateMany({}, {
+            name: req.body.name,
+            subscribedToChannel: req.body.subscribedToChannel
+        });
+        res.json(updatedSubscribers);
+    }
+    catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}));
 // Update one
 router.patch('/:id', getSubscriber, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.body.name != null) {
@@ -62,6 +76,17 @@ router.patch('/:id', getSubscriber, (req, res) => __awaiter(void 0, void 0, void
     }
     catch (err) {
         res.status(400).json({ message: err.message });
+    }
+}));
+// Delete all
+router.delete('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("PATCH /subscribers hit");
+    try {
+        const result = yield subscriber_1.default.deleteMany({});
+        res.json({ message: "Deleted subscribers", result });
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
     }
 }));
 // Delete one
