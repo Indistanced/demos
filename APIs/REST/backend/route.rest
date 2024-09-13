@@ -1,0 +1,50 @@
+// Get all
+GET http://localhost:3000/subscribers
+
+###
+
+// Get one
+GET http://localhost:3000/subscribers/66e2be099c57ecef0bbe2562
+
+###
+
+// Create one
+POST http://localhost:3000/subscribers
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "subscribedToChannel": "Orion Kaparthy"
+}
+
+###
+
+// Update all
+PATCH http://localhost:3000/subscribers
+Content-Type: application/json
+
+{
+    "name": "New Name",
+    "subscribedToChannel": "New Channel"
+}
+###
+
+// Update one
+PATCH http://localhost:3000/subscribers/66e1dde19f71d8fa389343ca
+Content-Type: application/json
+
+{
+    "name": "New Name"
+}
+
+###
+
+// Delete all
+DELETE http://localhost:3000/subscribers
+
+###
+
+// Delete one
+DELETE http://localhost:3000/subscribers/66e1d1394f8350d98b759025
+
+###
