@@ -26,18 +26,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Import dotenv for handling environment variables
 const dotenv_1 = __importDefault(require("dotenv"));
-// Import Express framework
 const express_1 = __importStar(require("express"));
+const mongoose_1 = require("mongoose");
+const subscribers_1 = __importDefault(require("./routes/subscribers"));
+const path_1 = __importDefault(require("path"));
 // Create instance of express application
 const app = (0, express_1.default)();
-// Import Mongoose library
-const mongoose_1 = require("mongoose");
-// Import subscribersRouter from ./routes/subscribers
-const subscribers_1 = __importDefault(require("./routes/subscribers"));
 // Load environment variables from .env file into process.env
-dotenv_1.default.config();
+dotenv_1.default.config({ path: path_1.default.join(__dirname, '../../backend/.env') });
 if (!process.env.DATABASE_URL) {
     throw new Error("DATABASE_URL is undefined in .env");
 }
@@ -49,6 +46,11 @@ const db = mongoose_1.connection;
 db.on('error', (error) => console.error(error));
 // Event listener to log successful connections
 db.once('open', () => console.log("Connected to database"));
+// Serve index.html from Express
+app.use(express_1.default.static(path_1.default.join(__dirname, '../../frontend')));
+app.get('/', (_req, res) => {
+    res.sendFile(path_1.default.join(__dirname, '../../frontend/index.html'));
+});
 // Handles JSON data sent in requests
 app.use((0, express_1.json)());
 // Handle requests to the /subscribers endpoint

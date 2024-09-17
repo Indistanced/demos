@@ -2,11 +2,10 @@
   "name": "restful",
   "version": "1.0.0",
   "description": "CREATE -> POST\\\r READ -> GET\\\r UPDATE -> PUT/PATCH\\\r DELETE -> DELETE",
-  "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "devStart": "tsc && nodemon dist/server.js",
-    "start": "node dist/server.js"
+    "dev": "tsc && nodemon backend/dist/server.js",
+    "start": "node backend/dist/server.js"
   },
   "keywords": [],
   "author": "",
