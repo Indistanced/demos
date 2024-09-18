@@ -12,7 +12,7 @@ This demo utilizes a REST API built with Express and Mongoose for query processi
 $ npm init -y
 $ npm i express mongoose
 $ npm i --save-dev dotenv nodemon
-$ npm run devStart
+$ npm run dev
 ```
 
 ### VSCode Extension
